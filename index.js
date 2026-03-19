@@ -1,6 +1,6 @@
 const express=require("express");
 
-const port=3001;
+
 
 const productRoutes=require('./routes/productRoutes');
 
@@ -8,6 +8,9 @@ const userRoutes=require("./routes/userRoutes");
 const logger = require("./middlewares/logger");
 const notFound = require("./middlewares/notFound");
 const errorHandler = require("./middlewares/errorHandler");
+
+require('dotenv').config();
+const port=process.env.PORT;
 
 const app=express();
 app.use(express.json());
