@@ -5,6 +5,9 @@ const port=3001;
 const productRoutes=require('./routes/productRoutes');
 
 const userRoutes=require("./routes/userRoutes");
+const logger = require("./middlewares/logger");
+const notFound = require("./middlewares/notFound");
+const errorHandler = require("./middlewares/errorHandler");
 
 const app=express();
 app.use(express.json());
@@ -25,6 +28,8 @@ app.use(express.json());
 // app.use(logger);
 // app.use(logger2);
 
+app.use(logger);
+
 app.get("/",(req,res)=>{
     res.send("first application");
 })
@@ -32,6 +37,13 @@ app.get("/",(req,res)=>{
 app.use("/products",productRoutes);
 
 app.use("/users",userRoutes);
+
+// app.get("/test-error",(req,res,next)=>{
+//     const error=new Error("this is test error");
+//     next(error);
+// });
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(port,()=>{
     console.log(`server is running on the http://localhost:${port}`);

@@ -9,7 +9,7 @@ let users = [
     { id: 3, name: "kiran", email: "kiran@gmail.com" }
 ];
 
-// ✅ correct export
+
 module.exports = {
     products,
     users
